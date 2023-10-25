@@ -5,6 +5,8 @@
     <title>MathML plugin | Trumbowyg</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/mathlive/mathlive-fonts.css" />
+    <link rel="stylesheet" href="https://unpkg.com/mathlive/dist/mathlive-static.css" />
 </head>
 <body class="documentation-body">
 <div class="main main-demo-inner">
@@ -77,6 +79,7 @@ $('#editor')
 <!-- Import jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="https://unpkg.com/mathlive"></script>
 <!-- Import MathJax -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
@@ -86,9 +89,41 @@ $('#editor')
     loadStyle('dist/ui/trumbowyg.min.css');
     loadStyle('dist/plugins/mathml/ui/trumbowyg.mathml.min.css', 'Import MathML plugin specific stylesheet');
     loadScript('dist/trumbowyg.min.js', 'Import Trumbowyg');
-    loadScript('plugins/mathml/trumbowyg.mathml.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
+    loadScript('plugins/mathlive/trumbowyg.mathlive.js', 'Import all plugins you want AFTER importing jQuery and Trumbowyg');
 </script>
 <script src="../js/runExampleCode.js"></script>
 <script src="../js/highlight.js"></script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<head>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/mathlive/dist/mathlive-static.css"
+    />
+</head>
+<html>
+<body>
+<div id="formula"></div>
+<script type="module">
+    window.addEventListener('DOMContentLoaded', () =>
+        import('https://unpkg.com/mathlive?module').then((mathlive) => {
+            // MathJax inline configuration
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [
+                        ['$', '$'],
+                        ['\\(', '\\)']
+                    ]
+                }
+            });
+
+            document.getElementById("formula").innerHTML =
+                mathlive.convertLatexToMarkup(`\\xrightarrow[\\Delta]{\\text{abcd}}`)
+        })
+    );
+</script>
 </body>
 </html>
