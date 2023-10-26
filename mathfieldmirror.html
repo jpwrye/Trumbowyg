@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Math Fields</title>
+    <!-- Include the MathLive stylesheet and JavaScript -->
+    <script defer src="//unpkg.com/mathlive"></script>
+</head>
+<body>
+
+<!-- Two math-field elements -->
+<math-field id="mathField1"></math-field>
+<math-field id="mathField2"></math-field>
+<br />
+<math-field id="mathField3">(x+1)(x-1) = \placeholder[answer]{?}</math-field>
+
+
+
+<script>
+    const mathField1 = document.getElementById('mathField1');
+    const mathField2 = document.getElementById('mathField2');
+
+    // Update mathField2 when mathField1 changes
+    mathField1.addEventListener('input', function() {
+        mathField2.setValue(mathField1.getValue());
+    });
+
+    // Update mathField1 when mathField2 changes
+    mathField2.addEventListener('input', function() {
+        mathField1.setValue(mathField2.getValue());
+    });
+</script>
+
+</body>
+</html>
